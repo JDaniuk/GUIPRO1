@@ -1,0 +1,66 @@
+package PRO1;
+
+import java.util.ArrayList;
+
+public class DzialPracownikow {
+    static long idCounter = 0;
+    private long id;
+    private static ArrayList<DzialPracownikow> dzialList = new ArrayList<>();
+    private String nazwa;
+
+    private DzialPracownikow(String name) throws NotUniqeNameException {
+        this.nazwa = name;
+        idCounter +=1;
+        this.id = idCounter;
+        for(DzialPracownikow dzial: dzialList){
+            if(this.nazwa.equalsIgnoreCase(dzial.nazwa)){
+                throw new NotUniqeNameException();
+                //System.out.println("error");
+            }
+        }
+    }
+
+    public static ArrayList<DzialPracownikow> getDzialList() {
+        return dzialList;
+    }
+
+    public static DzialPracownikow createDzial(String name){
+        DzialPracownikow dzial;
+        try {
+            dzial = new DzialPracownikow(name);
+        } catch (NotUniqeNameException e) {
+            throw new RuntimeException(e);
+        }
+        dzialList.add(dzial);
+        return dzial;
+
+
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "DzialPracownikow{" +
+                "nazwa='" + nazwa + '\'' +
+                '}';
+    }
+
+    public ArrayList<Pracownik> getListOfWorkers(){
+        ArrayList<Pracownik> returnList = new ArrayList<>();
+        for(Pracownik pracownik : Pracownik.getPracownikArrayList()){
+            if(pracownik.dzial.equals(this)){
+                returnList.add(pracownik);
+            }
+        }return returnList;
+    }
+}
+
+
+
+    class NotUniqeNameException extends Exception{
+        public NotUniqeNameException(){
+            super("Error: Nazwy dzialow musza byc unikalne!");
+        }
+
+}
