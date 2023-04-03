@@ -3,9 +3,9 @@ package PRO1;
 import java.util.ArrayList;
 
 public class DzialPracownikow {
-    static long idCounter = 0;
-    private long id;
-    private static ArrayList<DzialPracownikow> dzialList = new ArrayList<>();
+    static long idCounter = 0; //zmienna pomocnicza do id
+    private final long id;
+    private static ArrayList<DzialPracownikow> dzialList = new ArrayList<>(); // lista wszystkich działó
     private String nazwa;
 
     private DzialPracownikow(String name) throws NotUniqeNameException {
@@ -46,7 +46,7 @@ public class DzialPracownikow {
                 '}';
     }
 
-    public ArrayList<Pracownik> getListOfWorkers(){
+    public ArrayList<Pracownik> getListOfWorkers(){ //zwraca listę wszystkich pracowników z tego działu odwołując się do klasy Pracownik
         ArrayList<Pracownik> returnList = new ArrayList<>();
         for(Pracownik pracownik : Pracownik.getPracownikArrayList()){
             if(pracownik.dzial.equals(this)){

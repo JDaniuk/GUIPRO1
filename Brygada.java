@@ -15,4 +15,13 @@ public class Brygada {
     public void addWorker(ArrayList<Pracownik> pracownikArrayList){
         workerList.addAll(pracownikArrayList);
     }
+
+    @Override
+    public String toString() {
+        return "Brygada{" +
+                "nazwa='" + nazwa + '\'' +
+                ", brygadzista=" + brygadzista +
+                ", workerList=" + workerList +
+                '}';
+    }
 }

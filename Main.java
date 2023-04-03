@@ -13,5 +13,7 @@ public class Main {
         JanNowak.setNazwisko("Dąbrowski");
         System.out.println(JanNowak.getInicjal());
         //System.out.println(Pracownik.getPracownikArrayList().get(0)==(test1));
+        System.out.println(Pracownik.idCounter);
 
-    }
+
+    }}

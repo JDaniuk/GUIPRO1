@@ -5,10 +5,14 @@ import java.util.ArrayList;
 
 public abstract class Pracownik implements Comparable<Pracownik> { //TODO: Implement Comparable
     private static ArrayList<Pracownik> pracownikArrayList = new ArrayList<>();
+    static long idCounter = 0;
+    private final long id;
     String imie, nazwisko;
     LocalDate dataUrodzenia;
     DzialPracownikow dzial;
     public Pracownik(String imie, String nazwisko, LocalDate dataUrodzenia, DzialPracownikow dzial){
+        idCounter +=1;
+        this.id = idCounter;
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.dataUrodzenia = dataUrodzenia;
@@ -39,13 +43,28 @@ public abstract class Pracownik implements Comparable<Pracownik> { //TODO: Imple
     public String getNazwisko() {
         return nazwisko;
     }
+
+    @Override
+    public String toString() {
+        return "Pracownik{" +
+                "id=" + id +
+                ", imie='" + imie + '\'' +
+                ", nazwisko='" + nazwisko + '\'' +
+                ", dataUrodzenia=" + dataUrodzenia +
+                ", dzial=" + dzial +
+                '}';
+    }
 }
 
 
 class Specjalista extends Pracownik{
    private String specjalizacja;
+    static long idCounter = 0; //pomocnicza do id
+    private final long id;
     public Specjalista(String imie, String nazwisko, LocalDate dataUrodzenia, DzialPracownikow dzial, String specjalizacja){
         super(imie,nazwisko,dataUrodzenia,dzial);
+        idCounter +=1;
+        this.id = idCounter;
         this.specjalizacja = specjalizacja;
     }
 
@@ -61,6 +80,18 @@ class Specjalista extends Pracownik{
     @Override
     public int compareTo(Pracownik p) {
         return super.compareTo(p);
+    }
+
+    @Override
+    public String toString() {
+        return "Specjalista{" +
+                "specjalizacja='" + specjalizacja + '\'' +
+                ", id=" + id +
+                ", imie='" + imie + '\'' +
+                ", nazwisko='" + nazwisko + '\'' +
+                ", dataUrodzenia=" + dataUrodzenia +
+                ", dzial=" + dzial +
+                '}';
     }
 }
 
@@ -93,6 +124,19 @@ class Uzytkownik extends Pracownik{
         super.setNazwisko(nazwisko);
         inicjal = generateInicjal(this.imie, nazwisko);
     }
+
+    @Override
+    public String toString() {
+        return "Uzytkownik{" +
+                "login='" + login + '\'' +
+                ", haslo='" + haslo + '\'' +
+                ", inicjal='" + inicjal + '\'' +
+                ", imie='" + imie + '\'' +
+                ", nazwisko='" + nazwisko + '\'' +
+                ", dataUrodzenia=" + dataUrodzenia +
+                ", dzial=" + dzial +
+                '}';
+    }
 }
 
 class Brygadzista extends Uzytkownik{
@@ -107,5 +151,10 @@ class Brygadzista extends Uzytkownik{
                 returnList.add(brygada);
             }
         }return returnList;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
