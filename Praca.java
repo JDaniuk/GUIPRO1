@@ -5,18 +5,27 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Praca extends Thread {
-    enum rodzajPracy {OGOLNA, MONTAZ, DEMONTAZ, WYMIANA}
-
+    static enum rodzajPracy {OGOLNA, MONTAZ, DEMONTAZ, WYMIANA}
+    rodzajPracy rodzaj;
     int czasPracy; //w sekundach
-    boolean czyZrealizowane;
+    boolean czyZrealizowane = false;
     String opis;
     ArrayList<Praca> kolejkaPrac = new ArrayList<>();
+
+    public Praca(int czasPracy, String opis, rodzajPracy rodzaj){
+        this.czasPracy = czasPracy;
+        this.opis = opis;
+        rodzaj = rodzaj;
+
+    }
 
     @Override
     public void run() {
         if (kolejkaPrac.stream().allMatch(o -> o.czyZrealizowane == false)) {
             try {
-                sleep(czasPracy);
+                long start = System.currentTimeMillis();
+               Thread.sleep(Long.valueOf(czasPracy*1000));
+                System.out.println("Sleep time in ms = " + (System.currentTimeMillis() - start));
                 System.out.println(this.toString());
                 czyZrealizowane = true;
             }catch (InterruptedException e){
