@@ -180,3 +180,24 @@ class Brygadzista extends Uzytkownik {
         return super.toString();
     }
 }
+
+
+/*
+Pracownik-abstract[1p.](DONE)
+    interfejsComparable[1p.](DONE)
+    ●Imie:String (DONE)
+    ●Nazwisko:String (DONE)
+    ●DataUrodzenia:DateTime (DONE)
+    ●DzialPracownikow (DONE)
+    Statycznalistawszystkichpracowników[0,25p.](DONE)
+Specjalista(Pracownik)[0,25p.](DONE)
+    ●Specjalizacja:String(DONE)
+Uzytkownik(Pracownik)[0.75p.]
+    ●Login:String,(DONE)
+    ●Hasło:String,(DONE)
+    ●Inicjały:String-tworzonyzpierwszychliterimieniainazwiska,modyfikowany,kiedysięzmieniaimięlubnazwisko[0,5p.],    (DONE)
+Brygadzista(Uzytkownik)[1p.]
+    ●MetodaktórazwracalistęBrygad[0,25.],którychbrałudziałbrygadzista (DONE)
+    ●MetodaktórazwracalistęZlecenie[1p.](Wprojekciemabyćmożliwośćuzyskaniawjakichzleceniachbrałudziałbrygadzista). TODO
+
+ */

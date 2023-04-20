@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class DzialPracownikow {
     static long idCounter = 0; //zmienna pomocnicza do id
     private final long id;
-    private static ArrayList<DzialPracownikow> dzialList = new ArrayList<>(); // lista wszystkich działó
+    private static ArrayList<DzialPracownikow> dzialList = new ArrayList<>(); // lista wszystkich działów
     private String nazwa;
 
     private DzialPracownikow(String name) throws NotUniqeNameException {
@@ -64,3 +64,10 @@ public class DzialPracownikow {
         }
 
 }
+
+
+/*DzialPracowikow[1p.]
+●Nazwa:String,nazwa musi być unikalna, jeśli nie jest unikalna wyrzuć NotUniqueNameException(trzeba stworzyć takąklasę)przy tworzeniu obiektu (DONE)
+Metoda●staticDzialPracowikowcreatDzial(Nazwa:String),[0,5p.]●getListPracownik()-znajdzwszystkichpracownikówztegodziału[1p.] (DONE)
+
+ */
