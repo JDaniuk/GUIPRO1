@@ -5,10 +5,10 @@ import java.util.*;
 public class Praca extends Thread {
     enum rodzajPracy {OGOLNA, MONTAZ, DEMONTAZ, WYMIANA}
 
-    static int idCounter = 0;
-    int id;
+    static long idCounter = 0;
+    Long id;
 
-    static Map<Integer, Praca> pracaMap = new HashMap<>();
+    static Map<Long, Praca> pracaMap = new HashMap<>();
     rodzajPracy rodzaj;
     int czasPracy; //w sekundach
     boolean czyZrealizowane = false;
@@ -19,13 +19,14 @@ public class Praca extends Thread {
     public Praca(int czasPracy, String opis, rodzajPracy rodzaj) {
         this.czasPracy = czasPracy;
         this.opis = opis;
-        rodzaj = rodzaj;
+     this.rodzaj = rodzaj;
         idCounter += 1;
         this.id = idCounter;
         pracaMap.put(this.id, this);
 
     }
 
+    /*
 
     @Override
     synchronized public void run() { //
@@ -43,11 +44,7 @@ public class Praca extends Thread {
                 czyZrealizowane = true;
                 System.out.println(this);
                 this.interrupt();
-               /* for (Praca p : pracaMap.values()) {
-                    if (p.kolejkaPrac.contains(this)) {
-                        p.kolejkaPrac.remove(this);
-                    }
-                }*/
+
             } catch (InterruptedException e) {
             }
         } else {
@@ -56,24 +53,35 @@ public class Praca extends Thread {
                 czyZrealizowane = true;
                 System.out.println(this);
                 this.interrupt();
-             /*   for (Praca p : pracaMap.values()) {
-                    if (p.kolejkaPrac.contains(this)) {
-                        p.kolejkaPrac.remove(this);
-                    }
-                }*/
+
 
             } catch (InterruptedException e) {
             }
         }
     }
 
+*/
+
+   synchronized public void run(){
+        if(this.kolejkaPrac.isEmpty()){
+            try{
+                this.wait(czasPracy*1000);
+                czyZrealizowane = true;
+                System.out.println(this);
+            }catch (InterruptedException e){}
+        }else System.err.println("zlecenie o id: "+id+" nie zostało wykonane!");
+    }
+
     @Override
     public String toString() {
         return "Praca{" +
-                "czasPracy=" + czasPracy +
+                "id=" + id +
+                ", rodzaj=" + rodzaj +
+                ", czasPracy=" + czasPracy +
                 ", czyZrealizowane=" + czyZrealizowane +
-                ", opis='" + opis + '\'';
-
+                ", opis='" + opis + '\'' +
+                ", kolejkaPrac=" + kolejkaPrac +
+                '}';
     }
 
     public Praca findPracaById(int id) {

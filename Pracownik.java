@@ -10,6 +10,7 @@ public abstract class Pracownik implements Comparable<Pracownik> { //TODO: Imple
     String imie, nazwisko;
     LocalDate dataUrodzenia;
     DzialPracownikow dzial;
+    boolean isActive = false;
 
     public Pracownik(String imie, String nazwisko, LocalDate dataUrodzenia, DzialPracownikow dzial) {
         idCounter += 1;
@@ -40,7 +41,6 @@ public abstract class Pracownik implements Comparable<Pracownik> { //TODO: Imple
             }
         }
         return 0;
-
     }
 
     public static ArrayList<Pracownik> getPracownikArrayList() {
@@ -117,12 +117,17 @@ class Specjalista extends Pracownik {
 
 class Uzytkownik extends Pracownik {
     private String login, haslo, inicjal;
+    static long idCounter = 0; //pomocnicza do id
+    private final long id;
+
 
     public Uzytkownik(String imie, String nazwisko, LocalDate dataUrodzenia, DzialPracownikow dzial, String login, String haslo) {
         super(imie, nazwisko, dataUrodzenia, dzial);
         this.login = login;
         this.haslo = haslo;
         inicjal = generateInicjal(imie, nazwisko);
+        idCounter+=1;
+        this.id = idCounter;
     }
 
     private String generateInicjal(String imie, String nazwisko) {
@@ -160,9 +165,14 @@ class Uzytkownik extends Pracownik {
 }
 
 class Brygadzista extends Uzytkownik {
+    static long idCounter = 0; //pomocnicza do id
+    private final long id;
+
 
     public Brygadzista(String imie, String nazwisko, LocalDate dataUrodzenia, DzialPracownikow dzial, String login, String haslo) {
         super(imie, nazwisko, dataUrodzenia, dzial, login, haslo);
+        idCounter +=1;
+        id = idCounter;
     }
 
     public ArrayList<Brygada> getListaBrygad() {
@@ -179,7 +189,18 @@ class Brygadzista extends Uzytkownik {
     public String toString() {
         return super.toString();
     }
+
+    public ArrayList<Zlecenie> getListZlecen(){
+        ArrayList<Zlecenie> returnList = new ArrayList<>();
+        for(Zlecenie zlecenie : Zlecenie.zlecenieMap.values()){
+            if (zlecenie.getBrygada().brygadzista.equals(this)){
+                returnList.add(zlecenie);
+            }
+        }return returnList;
+    }
 }
+
+
 
 
 /*
@@ -198,6 +219,6 @@ Uzytkownik(Pracownik)[0.75p.]
     ●Inicjały:String-tworzonyzpierwszychliterimieniainazwiska,modyfikowany,kiedysięzmieniaimięlubnazwisko[0,5p.],    (DONE)
 Brygadzista(Uzytkownik)[1p.]
     ●MetodaktórazwracalistęBrygad[0,25.],którychbrałudziałbrygadzista (DONE)
-    ●MetodaktórazwracalistęZlecenie[1p.](Wprojekciemabyćmożliwośćuzyskaniawjakichzleceniachbrałudziałbrygadzista). TODO
+    ●MetodaktórazwracalistęZlecenie[1p.](Wprojekciemabyćmożliwośćuzyskaniawjakichzleceniachbrałudziałbrygadzista). (DONE)
 
  */

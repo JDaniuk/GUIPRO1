@@ -16,27 +16,29 @@ public class Main {
         //System.out.println(Pracownik.getPracownikArrayList().get(0)==(test1));
         System.out.println(Pracownik.idCounter);
 */
-        Praca praca1 = new Praca(4, "praca1", Praca.rodzajPracy.MONTAZ);
+        Praca praca1 = new Praca(1, "praca1", Praca.rodzajPracy.MONTAZ);
         Praca praca2 = new Praca(1, "praca2", Praca.rodzajPracy.MONTAZ);
         Praca praca3 = new Praca(1, "praca3", Praca.rodzajPracy.MONTAZ);
         Praca praca4 = new Praca(1, "praca4", Praca.rodzajPracy.MONTAZ);
         Praca praca5 = new Praca(1, "praca5", Praca.rodzajPracy.MONTAZ);
         Praca praca6 = new Praca(1, "praca6", Praca.rodzajPracy.MONTAZ);
         Praca praca7 = new Praca(1, "praca7", Praca.rodzajPracy.MONTAZ);
+        Praca praca8 = new Praca(2,"praca8", Praca.rodzajPracy.WYMIANA);
 
             DzialPracownikow dzialPracownikow = DzialPracownikow.createDzial("Test");
             Brygadzista brygadzista = new Brygadzista("test", "test", LocalDate.now(), dzialPracownikow, "123", "123");
             Brygada brygada = new Brygada("test",brygadzista);
             Zlecenie zlecenie = new Zlecenie(true,brygada);
-
-           praca1.kolejkaPrac.add(praca2);
-           praca2.kolejkaPrac.add(praca3);
-           praca2.kolejkaPrac.add(praca4);
-           praca2.kolejkaPrac.add(praca5);
-           //praca4.kolejkaPrac.add(praca7);
-           //praca5.kolejkaPrac.add(praca7);
-           praca1.start();
-
+        Thread t1 = new Thread(zlecenie);
+        zlecenie.addPraca(praca1);
+        zlecenie.addPraca(praca2);
+        zlecenie.addPraca(praca3);
+        zlecenie.addPraca(praca4);
+        zlecenie.addPraca(praca5);
+        zlecenie.addPraca(praca6);
+        zlecenie.addPraca(praca7);
+       t1.start();
+       System.out.println(zlecenie.stan());
 
 
 

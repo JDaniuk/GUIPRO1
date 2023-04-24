@@ -8,7 +8,8 @@ public class Brygada {
     private final long id;
     String nazwa;
     Brygadzista brygadzista;
-    ArrayList<Pracownik> workerList;
+    ArrayList<Pracownik> workerList = new ArrayList<>();
+
 
     public Brygada(){
         idCounter+=1;
